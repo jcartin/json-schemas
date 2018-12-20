@@ -1,0 +1,19 @@
+{
+    "$id": "http://localhost/schemas/fivepoints/say.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Say element schema",
+    "description": "Specifies the text to speak based on the user's selected language.",
+    "type": "object",
+    "properties": {
+        "en": {
+            "description": "TODO",
+            "type": "string"
+        },
+        "es": {
+            "description": "TODO",
+            "type": "string"
+        }
+    },
+    "required": ["en", "es"],
+    "additionalProperties": false
+}

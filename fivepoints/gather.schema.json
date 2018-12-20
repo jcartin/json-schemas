@@ -1,0 +1,170 @@
+{
+    "$id": "http://localhost/schemas/fivepoints/gather.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Gather element schema",
+    "description": "Gather input from the user based on an audio file.",
+    "type": "object",
+    "required": [
+        "numDigits",
+        "audio",
+        "say"
+    ],
+    "oneOf": [
+        {
+            "$ref": "#/definitions/gatherWithRouteDef"
+        },
+        {
+            "$ref": "#/definitions/gatherWithValidateDef"
+        }
+    ],
+    "fields": {
+        "numDigitsField": {
+            "description": "The number of digits to expect the user to respond with.",
+            "type": "integer"
+        },
+        "audioField": {
+            "description": "The name of an audio file that should be played during the execution of this script block. This file must exist in the folder specified at the top of the document.",
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "gatherWithRouteDef": {
+            "description": "Gathers some input from the user.",
+            "type": "object",
+            "properties": {
+                "numDigits": {
+                    "$ref": "#/fields/numDigitsField"
+                },
+                "audio": {
+                    "$ref": "#/fields/audioField"
+                },
+                "say": {
+                    "$ref": "http://localhost/schemas/fivepoints/say.schema.json"
+                },
+                "route": {
+                    "$ref": "#/definitions/routeDef"
+                }
+            },
+            "required": [
+                "numDigits",
+                "audio",
+                "say",
+                "route"
+            ]
+        },
+        "gatherWithValidateDef": {
+            "description": "Gathers some input from the user.",
+            "type": "object",
+            "properties": {
+                "numDigits": {
+                    "$ref": "#/fields/numDigitsField"
+                },
+                "audio": {
+                    "$ref": "#/fields/audioField"
+                },
+                "say": {
+                    "$ref": "http://localhost/schemas/fivepoints/say.schema.json"
+                },
+                "validate": {
+                    "$ref": "#/definitions/validateDef"
+                }
+            },
+            "required": [
+                "numDigits",
+                "audio",
+                "say",
+                "validate"
+            ]
+        },
+        "routeDef": {
+            "description": "Specifies the script block to execute based on the selection returned from the Twilio API.",
+            "type": "object",
+            "properties": {
+                "0": {
+                    "description": "Execute the named script block if the user select '0'.",
+                    "type": "string"
+                },
+                "1": {
+                    "description": "Execute the named script block if the user select '1'.",
+                    "type": "string"
+                },
+                "2": {
+                    "description": "Execute the named script block if the user select '2'.",
+                    "type": "string"
+                },
+                "3": {
+                    "description": "Execute the named script block if the user select '3'.",
+                    "type": "string"
+                },
+                "4": {
+                    "description": "Execute the named script block if the user select '4'.",
+                    "type": "string"
+                },
+                "5": {
+                    "description": "Execute the named script block if the user select '5'.",
+                    "type": "string"
+                },
+                "6": {
+                    "description": "Execute the named script block if the user select '6'.",
+                    "type": "string"
+                },
+                "7": {
+                    "description": "Execute the named script block if the user select '7'.",
+                    "type": "string"
+                },
+                "8": {
+                    "description": "Execute the named script block if the user select '8'.",
+                    "type": "string"
+                },
+                "9": {
+                    "description": "Execute the named script block if the user select '9'.",
+                    "type": "string"
+                },
+                "any": {
+                    "description": "Execute the named script block if the user selects any number.",
+                    "type": "string"
+                }
+            }
+        },
+        "validateDef": {
+            "description": "Executes a method and if the result is falsey, the specified script block is executed.",
+            "type": "object",
+            "anyOf": [
+                {
+                    "getTicket": {
+                        "description": "Attempts to retrieve the citation information based on previously gathered information. If the validation fails, then the specified script block will be executed.",
+                        "type": "string"
+                    },
+                    "validateCard": {
+                        "description": "Validates that the retrieved card number is not less than 15 characters. If the validation fails, then the specified script block will be executed.",
+                        "type": "string"
+                    },
+                    "validateExp": {
+                        "description": "Validates that the retrieved card expiration date is between 4 and 12 characters. If the validation fails, then the specified script block will be executed.",
+                        "type": "string"
+                    },
+                    "validateCVV": {
+                        "description": "Validates that the retrieved CVV number if either 3 or 4 characters. If the validation fails, then the specified script block will be executed.",
+                        "type": "string"
+                    },
+                    "validateZip": {
+                        "description": "Validates that the retrieved Billing Zip Code is 5 characters in length. If the validation fails, then the specified script block will be executed.",
+                        "type": "string"
+                    },
+                    "processTransaction": {
+                        "description": "Executes the Make Payment service method to execute a transaction. If the validation fails, then the specified script block will be executed.",
+                        "type": "string"
+                    }                    
+                }
+            ],
+            "properties": {
+                "pass": {
+                    "description": "If the specified validation functions ALL succeed, then the specified script block will be executed.",
+                    "type": "string"
+                }
+            },
+            "required": ["pass"],
+            "additionalProperties": true
+        }
+    }
+}

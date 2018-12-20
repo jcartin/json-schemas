@@ -1,0 +1,56 @@
+{
+    "$id": "http://localhost/schemas/fivepoints/condition.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Condition element schema",
+    "description": "Describes a one-way conversation with the user.",
+    "type": "object",
+    "properties": {
+        "ticket_date": {
+            "description": "Evaluates the ticket_date variable against the specified value.",
+            "type": "string"
+        },
+        "ticket_amount": {
+            "description": "Evaluates the ticket_amount variable against the specified value.",
+            "type": "number"
+        },
+        "ticket_number": {
+            "description": "Evaluates the ticket_number variable against the specified value.",
+            "type": "string"
+        },
+        "court_date": {
+            "description": "Evaluates the court_date variable against the specified value.",
+            "type": "string"
+        },
+        "service_fee": {
+            "description": "Evaluates the service_fee variable against the specified value.",
+            "type": "number"
+        },
+        "total_amount": {
+            "description": "Evaluates the total_amount variable against the specified value.",
+            "type": "number"
+        },
+        "card_type": {
+            "description": "Evaluates the card_type variable against the specified value.",
+            "type": "string"
+        },
+        "confirmation_number": {
+            "description": "Evaluates the confirmation_number variable against the specified value.",
+            "type": "string"
+        },
+        "transaction_failed": {
+            "description": "Evaluates the transaction_failed variable against the specified value.",
+            "type": "boolean"
+        },
+        "gather": {
+            "$ref": "http://localhost/schemas/fivepoints/gather.schema.json"
+        },
+        "dialog": {
+            "$ref": "http://localhost/schemas/fivepoints/dialog.schema.json"
+        },
+        "include": {
+            "description": "Includes the directives from another named script block.",
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,43 @@
+{
+    "$id": "http://localhost/schemas/fivepoints/dialog.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Dialog element schema",
+    "description": "Describes a one-way conversation with the user.",
+    "type": "object",
+    "properties": {
+        "include": {
+            "description": "TODO",
+            "type": "string"
+        }
+    },
+    "patternProperties": {
+        "\\d+": {
+            "description": "TODO",
+            "type": "object",
+            "anyOf": [
+                { "$ref": "#/definitions/fields/say" },
+                { "$ref": "#/definitions/fields/pause" },
+                { "$ref": "#/definitions/fields/dial" }
+            ],
+            "properties": {
+                
+            }
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "fields": {
+            "say": {
+                "$ref": "http://localhost/schemas/fivepoints/say.schema.json"
+            },
+            "pause": {
+                "description": "TODO",
+                "type": "integer"
+            },
+            "dial": {
+                "description": "TODO",
+                "type": "string"
+            }
+        }
+    }
+}

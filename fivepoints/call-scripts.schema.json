@@ -1,0 +1,52 @@
+{
+    "$id": "http://localhost/schemas/payments/call-scripts.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "IVR call script",
+    "description": "The layout for an interactive call script for driving an IVR conversation.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "The name of the script.",
+            "type": "string"
+        },
+        "folder": {
+            "description": "The folder name for any audio files that are referenced in the script",
+            "type": "string"
+        },
+        "script": {
+            "description": "The steps that the script can use to drive the conversation", 
+            "type": "object",
+            "patternProperties": {
+                ".*": {
+                    "description": "The name of the step. This name is important as it can be referenced by other steps",
+                    "type": "object",
+                    "properties": {
+                        "audio": {
+                            "description": "The name of the mp3 file to play. This file must exist in the folder named at the root of the call script.",
+                            "type": "string"
+                        },
+                        "dialog": {
+                            "$ref": "http://localhost/schemas/fivepoints/dialog.schema.json"
+                        },
+                        "gather": {
+                            "$ref": "http://localhost/schemas/fivepoints/gather.schema.json"
+                        },
+                        "include": {
+                            "description": "TODO",
+                            "type": "string"
+                        },
+                        "condition": {
+                            "$ref": "http://localhost/schemas/fivepoints/condition.schema.json"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "name",
+        "folder",
+        "script"
+    ],
+    "additionalProperties": false
+}
